@@ -1,0 +1,244 @@
+import re
+
+with open('src/App.tsx', 'r') as f:
+    content = f.read()
+
+# We'll use a regex to replace the entire `index.html` template block.
+target_pattern = re.compile(r"        'index\.html': \{ type: 'file', content: `<!DOCTYPE html>.*?</html>` \}", re.DOTALL)
+
+new_template = """        'index.html': { type: 'file', content: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agentic Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-50 flex h-screen overflow-hidden font-sans">
+  
+  <!-- Sidebar Navigation -->
+  <aside class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col hidden md:flex">
+    <div class="p-6">
+      <h2 class="text-xl font-bold text-purple-400 tracking-wide">Nexus<span class="text-slate-100">OS</span></h2>
+    </div>
+    <nav class="flex-1 px-4 space-y-2">
+      <a href="#" class="block px-4 py-2 rounded-lg bg-purple-500/10 text-purple-400 font-medium border border-purple-500/20 transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+        Overview
+      </a>
+      <a href="#" class="block px-4 py-2 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+        Agents
+      </a>
+      <a href="#" class="block px-4 py-2 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        Logs
+      </a>
+      <a href="#" class="block px-4 py-2 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        Settings
+      </a>
+    </nav>
+    <div class="p-4 border-t border-slate-800 text-xs text-slate-500">
+      NexusOS v2.4.1
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 overflow-y-auto p-4 md:p-8">
+    <header class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-100">Operations Dashboard</h1>
+        <p class="text-sm text-slate-400 mt-1">Real-time telemetry and fleet coordination.</p>
+      </div>
+      <div class="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full self-start md:self-auto">
+        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+        <span class="text-xs font-medium text-emerald-400" id="last-updated">Live Sync</span>
+      </div>
+    </header>
+    
+    <!-- Metrics Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      
+      <!-- Card 1 -->
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl hover:border-purple-500/50 hover:bg-slate-800/80 transition-all cursor-default group relative overflow-hidden">
+        <h3 class="text-sm font-medium text-slate-400 group-hover:text-purple-300 transition-colors">Agents Active</h3>
+        <p class="text-3xl font-mono mt-2 text-slate-100" id="metric-agents">--</p>
+        <div class="mt-2 text-xs text-purple-400 flex items-center gap-1">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+          2 from last hour
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-slate-800">
+           <div class="h-full bg-purple-500 w-3/4"></div>
+        </div>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl hover:border-emerald-500/50 hover:bg-slate-800/80 transition-all cursor-default group relative overflow-hidden">
+        <h3 class="text-sm font-medium text-slate-400 group-hover:text-emerald-300 transition-colors">Tasks Completed</h3>
+        <p class="text-3xl font-mono mt-2 text-emerald-400" id="metric-tasks">--</p>
+        <div class="mt-2 text-xs text-emerald-500 flex items-center gap-1">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+          125/min
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-slate-800">
+           <div class="h-full bg-emerald-500 w-full"></div>
+        </div>
+      </div>
+      
+      <!-- Card 3 -->
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl hover:border-amber-500/50 hover:bg-slate-800/80 transition-all cursor-default group relative overflow-hidden">
+        <h3 class="text-sm font-medium text-slate-400 group-hover:text-amber-300 transition-colors">System Load</h3>
+        <p class="text-3xl font-mono mt-2 text-amber-400" id="metric-load">--</p>
+        <div class="mt-2 text-xs text-amber-500 flex items-center gap-1">
+          Stable
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-slate-800">
+           <div class="h-full bg-amber-500 w-2/3" id="metric-load-bar"></div>
+        </div>
+      </div>
+
+      <!-- Card 4 (New) -->
+      <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl hover:border-blue-500/50 hover:bg-slate-800/80 transition-all cursor-default group relative overflow-hidden">
+        <h3 class="text-sm font-medium text-slate-400 group-hover:text-blue-300 transition-colors">Error Rate</h3>
+        <p class="text-3xl font-mono mt-2 text-blue-400" id="metric-errors">0.02%</p>
+        <div class="mt-2 text-xs text-slate-500 flex items-center gap-1">
+          Within SLA
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-slate-800">
+           <div class="h-full bg-blue-500" style="width: 2%"></div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Charts and Tables -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Chart Section -->
+      <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-6 h-80 flex flex-col">
+         <div class="flex items-center justify-between mb-4">
+           <h3 class="text-sm font-medium text-slate-400">Throughput Trend (Simulated)</h3>
+           <select class="bg-slate-950 border border-slate-800 text-xs text-slate-300 rounded px-2 py-1 outline-none">
+             <option>Last Hour</option>
+             <option>Last 24 Hours</option>
+           </select>
+         </div>
+         <div class="flex-1 flex items-end gap-2 border-b border-l border-slate-700 p-4" id="chart-container">
+            <!-- Bars generated via JS -->
+         </div>
+      </div>
+
+      <!-- Recent Activity Table -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 h-80 flex flex-col overflow-hidden">
+        <h3 class="text-sm font-medium text-slate-400 mb-4">Live Activity</h3>
+        <div class="flex-1 overflow-y-auto pr-2 space-y-3" id="activity-feed">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Initial Population
+    document.getElementById('metric-agents').textContent = '12';
+    document.getElementById('metric-tasks').textContent = '4,231';
+    document.getElementById('metric-load').textContent = '68%';
+
+    // Update timestamp
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('last-updated').textContent = \`Live \${now.toLocaleTimeString()}\`;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Generate chart bars
+    const chart = document.getElementById('chart-container');
+    for (let i = 0; i < 30; i++) {
+      const height = Math.floor(Math.random() * 80) + 10;
+      const bar = document.createElement('div');
+      bar.className = 'flex-1 bg-indigo-500/50 hover:bg-indigo-400 rounded-t-sm transition-all duration-300';
+      bar.style.height = height + '%';
+      chart.appendChild(bar);
+    }
+
+    // Activity Feed Simulator
+    const feed = document.getElementById('activity-feed');
+    const actions = ["Compiled module", "Generated response", "Analyzed dataset", "Optimized route", "Resolved conflict"];
+    const agents = ["Agent-Alpha", "Agent-Beta", "Agent-Gamma", "Agent-Delta"];
+    
+    function addFeedItem() {
+      const item = document.createElement('div');
+      item.className = 'flex items-start gap-3 p-2 rounded-lg bg-slate-950/50 border border-slate-800/50 animate-fade-in';
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      const agent = agents[Math.floor(Math.random() * agents.length)];
+      
+      item.innerHTML = \`
+        <div class="w-2 h-2 mt-1.5 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.5)]"></div>
+        <div>
+          <p class="text-xs font-medium text-slate-300">\${action}</p>
+          <p class="text-[10px] text-slate-500">\${agent} • Just now</p>
+        </div>
+      \`;
+      
+      feed.insertBefore(item, feed.firstChild);
+      if (feed.children.length > 6) {
+        feed.removeChild(feed.lastChild);
+      }
+    }
+
+    // Populate initial feed
+    for(let i=0; i<4; i++) addFeedItem();
+    
+    // Simulate real-time data ticks
+    setInterval(() => {
+      // Update Tasks
+      let tasks = parseInt(document.getElementById('metric-tasks').textContent.replace(/,/g, ''));
+      tasks += Math.floor(Math.random() * 15);
+      document.getElementById('metric-tasks').textContent = tasks.toLocaleString();
+      
+      // Update Load
+      const load = Math.floor(Math.random() * 30) + 50;
+      document.getElementById('metric-load').textContent = load + '%';
+      document.getElementById('metric-load-bar').style.width = load + '%';
+
+      // Update Chart
+      chart.removeChild(chart.firstElementChild);
+      const newHeight = Math.floor(Math.random() * 80) + 10;
+      const newBar = document.createElement('div');
+      newBar.className = 'flex-1 bg-indigo-500/50 hover:bg-indigo-400 rounded-t-sm transition-all duration-300';
+      newBar.style.height = newHeight + '%';
+      chart.appendChild(newBar);
+
+      // Add to feed occasionally
+      if (Math.random() > 0.3) {
+        addFeedItem();
+      }
+    }, 2000);
+  </script>
+
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.3s ease-out forwards;
+    }
+    /* Hide scrollbar for clean UI */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</body>
+</html>` }"""
+
+content, count = target_pattern.subn(new_template, content)
+if count > 0:
+    with open('src/App.tsx', 'w') as f:
+        f.write(content)
+    print("Replaced successfully")
+else:
+    print("Regex failed to match")

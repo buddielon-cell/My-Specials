@@ -1,0 +1,6 @@
+{
+  "name": "Build Viewer",
+  "description": "Unzip and explore application builds right in your browser.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

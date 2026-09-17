@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Sandbox environment - open access for this prototype
+    match /ledger/{eventId} {
+      allow read, write: if true;
+    }
+    match /proposals/{proposalId} {
+      allow read, write: if true;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

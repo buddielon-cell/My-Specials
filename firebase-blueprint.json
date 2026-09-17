@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "LedgerEvent": {
+      "title": "LedgerEvent",
+      "description": "System event logged to the ledger.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "timestamp": { "type": "number" },
+        "type": { "type": "string", "enum": ["SYSTEM", "PROPOSAL", "APPROVAL", "RESEARCH", "DEPLOYMENT"] },
+        "description": { "type": "string", "maxLength": 5000 },
+        "details": { "type": "string", "maxLength": 50000 }
+      },
+      "required": ["id", "timestamp", "type", "description"]
+    },
+    "Proposal": {
+      "title": "Proposal",
+      "description": "A system proposal for codebase changes.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 500 },
+        "version": { "type": "string", "maxLength": 50 },
+        "riskTier": { "type": "string", "maxLength": 100 },
+        "objective": { "type": "string", "maxLength": 2000 },
+        "rationale": { "type": "string", "maxLength": 5000 },
+        "proposedState": { "type": "string", "maxLength": 100000 },
+        "status": { "type": "string", "maxLength": 50 },
+        "timestamp": { "type": "number" },
+        "revisions": { "type": "array" }
+      },
+      "required": ["id", "title", "version", "riskTier", "objective", "rationale", "proposedState", "status", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/ledger/{eventId}": {
+      "schema": { "$ref": "#/entities/LedgerEvent" },
+      "description": "Ledger events collection"
+    },
+    "/proposals/{proposalId}": {
+      "schema": { "$ref": "#/entities/Proposal" },
+      "description": "System proposals collection"
+    }
+  }
+}

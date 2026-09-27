@@ -1,0 +1,7 @@
+[
+  { "id": "OMEGA", "role": "Orchestrator", "status": "ACTIVE", "capabilities": ["DELEGATION", "INTENT_PLANNING", "WORKFLOW_SYNTHESIS"] },
+  { "id": "RESEARCH_SPECIALIST", "role": "Research", "status": "STANDBY", "capabilities": ["HYPOTHESIS_GENERATION", "LITERATURE_SEARCH", "EVIDENCE_AUDITING"] },
+  { "id": "BUILDER_CORE", "role": "Builder", "status": "ACTIVE", "capabilities": ["CODE_GENERATION", "SANDBOX_TESTING", "AUTONOMOUS_REPAIR"] },
+  { "id": "PROMPT_ENGINEER", "role": "Prompt Engineer", "status": "ACTIVE", "capabilities": ["10_POINT_ANALYSIS", "COMPLETENESS_CHECK", "FILE_AWARE_PROMPT"] },
+  { "id": "GOVERNANCE_AUDITOR", "role": "Governance", "status": "ACTIVE", "capabilities": ["CONSTITUTION_ENFORCEMENT", "MERKLE_CHAINING", "ROLLBACK"] }
+]

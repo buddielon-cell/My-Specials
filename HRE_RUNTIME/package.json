@@ -1,0 +1,17 @@
+{
+  "name": "buddie-aeon-universal-runtime",
+  "version": "2.2.0",
+  "description": "AEON Universal Hardware/Runtime Execution (HRE) Engine",
+  "main": "runtime/index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node runtime/index.mjs",
+    "doctor": "node runtime/doctor.mjs",
+    "daemon": "node research-engine/manager.mjs",
+    "supervisor": "node supervisor/index.mjs",
+    "cli": "node runtime/cli.mjs"
+  },
+  "keywords": ["aeon", "hre", "termux", "ai-runtime", "autonomous-research", "governance"],
+  "author": "BUDDIE AEON Universal Team",
+  "license": "Apache-2.0"
+}

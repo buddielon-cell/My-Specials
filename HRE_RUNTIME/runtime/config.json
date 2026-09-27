@@ -1,0 +1,35 @@
+{
+  "runtime": {
+    "id": "buddie-aeon-universal-runtime",
+    "version": "2.2.0",
+    "execution_mode": "HYBRID_RESILIENT",
+    "engine": "HRE_UNIVERSAL",
+    "environment": "Universal (Browser/Android/Linux/Windows/macOS)",
+    "adapters": {
+      "local": { "enabled": true, "engine": "in-memory-wasm" },
+      "termux": { "enabled": true, "endpoint": "http://127.0.0.1:8787" },
+      "node_cli": { "enabled": true, "entry": "runtime/index.mjs" }
+    },
+    "merkle_ledger": {
+      "enabled": true,
+      "hash_algorithm": "SHA-256",
+      "immutable_audit_path": "state/audit.jsonl"
+    },
+    "governance": {
+      "strict_mode": true,
+      "human_in_the_loop": true
+    },
+    "maxTaskRuntimeSeconds": 14400,
+    "memoryRegisterLimit": 1000
+  },
+  "governance": {
+    "strictMode": true,
+    "requireOverrideForCritical": true,
+    "immutableAuditPath": "state/audit.jsonl"
+  },
+  "network": {
+    "termuxDaemonPort": 8787,
+    "ollamaEndpoint": "http://127.0.0.1:11434",
+    "openRouterEndpoint": "https://openrouter.ai/api/v1"
+  }
+}
